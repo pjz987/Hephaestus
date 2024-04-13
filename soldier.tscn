@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf5uo5iltjxbx"]
+
+[ext_resource type="Script" path="res://soldier.gd" id="1_co4ma"]
+[ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_w104w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc6hm"]
+size = Vector2(12, 25)
+
+[node name="Soldier" type="CharacterBody2D"]
+script = ExtResource("1_co4ma")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_fc6hm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0.74902, 1)
+position = Vector2(-4.76837e-07, -13)
+scale = Vector2(0.1, 0.2)
+texture = ExtResource("1_w104w")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv6bexvroye4v"]
+
+[ext_resource type="Script" path="res://giant.gd" id="1_4qho0"]
+[ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_8vswq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxo4t"]
+size = Vector2(32, 64)
+
+[node name="Giant" type="CharacterBody2D"]
+script = ExtResource("1_4qho0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_rxo4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0588235, 0.980392, 0.54902, 1)
+position = Vector2(0, -32)
+scale = Vector2(0.25, 0.5)
+texture = ExtResource("1_8vswq")
