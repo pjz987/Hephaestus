@@ -1,12 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf5uo5iltjxbx"]
+[gd_scene load_steps=8 format=3 uid="uid://cf5uo5iltjxbx"]
 
 [ext_resource type="Script" path="res://soldier.gd" id="1_co4ma"]
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_w104w"]
+[ext_resource type="FontFile" uid="uid://batyxbiub3ddj" path="res://prstart.ttf" id="3_o0uyj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc6hm"]
 size = Vector2(12, 25)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0s6b"]
+size = Vector2(10, 24)
+
+[sub_resource type="Theme" id="Theme_2hwnq"]
+default_font = ExtResource("3_o0uyj")
+default_font_size = 8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usa7s"]
+size = Vector2(12, 2)
+
 [node name="Soldier" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_co4ma")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,3 +30,39 @@ modulate = Color(1, 0, 0.74902, 1)
 position = Vector2(-4.76837e-07, -13)
 scale = Vector2(0.1, 0.2)
 texture = ExtResource("1_w104w")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_t0s6b")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -8.0
+offset_top = -35.0
+offset_right = 8.0
+offset_bottom = -27.0
+theme = SubResource("Theme_2hwnq")
+text = "20
+"
+
+[node name="Weapon" type="Area2D" parent="."]
+position = Vector2(0, -15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+modulate = Color(0.4, 0.4, 0.4, 1)
+scale = Vector2(0.1, 0.015)
+texture = ExtResource("1_w104w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
+shape = SubResource("RectangleShape2D_usa7s")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(5, -3)
+target_position = Vector2(5, 2.08165e-12)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
