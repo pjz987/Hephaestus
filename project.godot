@@ -15,6 +15,10 @@ run/main_scene="res://battle.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://GameManager.gd"
+
 [display]
 
 window/size/viewport_width=320
@@ -27,3 +31,5 @@ window/stretch/mode="canvas_items"
 
 2d_physics/layer_1="soldiers"
 2d_physics/layer_2="giants"
+2d_physics/layer_3="resource"
+2d_physics/layer_4="floor"

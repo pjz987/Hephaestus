@@ -1,13 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://cv6bexvroye4v"]
+[gd_scene load_steps=10 format=3 uid="uid://cv6bexvroye4v"]
 
 [ext_resource type="Script" path="res://giant.gd" id="1_4qho0"]
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_8vswq"]
+[ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_6gmam"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y037u"]
 size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxo4t"]
 size = Vector2(32, 64)
+
+[sub_resource type="Animation" id="Animation_ayo80"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, -55)]
+}
 
 [sub_resource type="Animation" id="Animation_hywkq"]
 resource_name = "attack"
@@ -26,26 +42,14 @@ tracks/0/keys = {
 "values": [Vector2(-9, -55), Vector2(-22, -55), Vector2(-22, -6), Vector2(-5, -7)]
 }
 
-[sub_resource type="Animation" id="Animation_ayo80"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-9, -55)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0t73t"]
 _data = {
 "RESET": SubResource("Animation_ayo80"),
 "attack": SubResource("Animation_hywkq")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_654nm"]
+size = Vector2(32, 64)
 
 [node name="Giant" type="CharacterBody2D"]
 collision_layer = 2
@@ -81,3 +85,25 @@ target_position = Vector2(-15, 2.08165e-12)
 libraries = {
 "": SubResource("AnimationLibrary_0t73t")
 }
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_654nm")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -8.0
+offset_top = -73.0
+offset_right = 8.0
+offset_bottom = -65.0
+theme = ExtResource("3_6gmam")
+text = "40
+"
+
+[node name="ResourceSpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, -41)
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

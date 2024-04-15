@@ -1,3 +1,4 @@
+class_name Soldier
 extends CharacterBody2D
 
 @export var movement_speed = 15
@@ -12,14 +13,23 @@ enum STATE {MOVE, REST, ATTACK}
 @export var max_health = 20
 @export var health: int
 
-@export var attack = 10
+@export var attack = 2
+var is_hero: bool
 
+@onready var sprite_2d = $Sprite2D
 @onready var label = $Label
 @onready var ray_cast_2d = $RayCast2D
 @onready var animation_player = $AnimationPlayer
 
 func _ready():
+	is_hero = randf() > 0.8
 	health = max_health
+	if is_hero:
+		health *= 2
+		attack *= 2
+		sprite_2d.modulate = Color(0.8, 0.9, 0.5, 1.0)
+		scale *= 1.5
+		
 	label.text = str(health)
 	if randf() >= 0.5:
 		start_resting()

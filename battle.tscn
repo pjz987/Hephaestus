@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy73dc8nf5c4w"]
+[gd_scene load_steps=8 format=3 uid="uid://cy73dc8nf5c4w"]
 
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_1u7h3"]
+[ext_resource type="Script" path="res://battle.gd" id="1_i40am"]
 [ext_resource type="PackedScene" uid="uid://cv6bexvroye4v" path="res://giant.tscn" id="2_v0u1n"]
 [ext_resource type="PackedScene" uid="uid://cf5uo5iltjxbx" path="res://soldier.tscn" id="3_lpfun"]
+[ext_resource type="PackedScene" uid="uid://c3xctb61ngcat" path="res://ui.tscn" id="4_ode7y"]
+[ext_resource type="PackedScene" uid="uid://bj3fwj0k6asmk" path="res://wood.tscn" id="6_kyfsu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2hoq"]
+size = Vector2(320.5, 34)
 
 [node name="Battle" type="Node2D"]
+script = ExtResource("1_i40am")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.270588, 0.270588, 0.270588, 0.490196)
+z_index = -1
 scale = Vector2(2.5, 1.40625)
 texture = ExtResource("1_1u7h3")
 centered = false
 
 [node name="Forge" type="Node2D" parent="."]
+z_index = 1
 
 [node name="Icon" type="Sprite2D" parent="Forge"]
 modulate = Color(0.960784, 0.298039, 0.211765, 1)
@@ -26,3 +35,40 @@ position = Vector2(288, 180)
 
 [node name="Soldier" parent="." instance=ExtResource("3_lpfun")]
 position = Vector2(72, 180)
+
+[node name="Soldier2" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(86, 180)
+
+[node name="Soldier3" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(101, 180)
+
+[node name="Soldier4" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(115, 180)
+
+[node name="Soldier5" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(129, 180)
+
+[node name="UI" parent="." instance=ExtResource("4_ode7y")]
+
+[node name="SoldierSpawnPoint" type="Node2D" parent="."]
+position = Vector2(44, 180)
+
+[node name="GiantSpawnPoint" type="Node2D" parent="."]
+position = Vector2(338, 180)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 180)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(160.75, 17)
+shape = SubResource("RectangleShape2D_w2hoq")
+
+[node name="Wood" parent="." instance=ExtResource("6_kyfsu")]
+position = Vector2(164, 86)
+
+[connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
+[connection signal="button_down" from="UI/SpawnGiantButton" to="." method="_on_spawn_giant_button_button_down"]
+
+[editable path="UI"]

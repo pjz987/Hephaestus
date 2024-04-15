@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3xctb61ngcat"]
+
+[ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="1_wacgf"]
+[ext_resource type="FontFile" uid="uid://batyxbiub3ddj" path="res://prstart.ttf" id="2_2ak3c"]
+
+[sub_resource type="FontVariation" id="FontVariation_brvwi"]
+base_font = ExtResource("2_2ak3c")
+spacing_top = 1
+
+[node name="UI" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wacgf")
+
+[node name="SpawnSoldierButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 69.0
+offset_bottom = 55.0
+theme = ExtResource("1_wacgf")
+theme_override_fonts/font = SubResource("FontVariation_brvwi")
+text = "Spawn
+Soldier"
+
+[node name="SpawnGiantButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 257.0
+offset_top = 31.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("1_wacgf")
+theme_override_fonts/font = SubResource("FontVariation_brvwi")
+text = "Spawn
+Giant"
+
+[node name="ResourcesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 4.0
+offset_right = 148.0
+offset_bottom = 12.0
+text = "Wood: 0"

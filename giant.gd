@@ -17,10 +17,15 @@ enum STATE {MOVE, REST, ATTACK}
 
 @onready var ray_cast_2d = $RayCast2D
 @onready var animation_player = $AnimationPlayer
+@onready var label = $Label
+@onready var resource_spawn_point = $ResourceSpawnPoint
 
+@onready var WOOD_SCENE = load('res://wood.tscn')
 
 
 func _ready():
+	health = max_health
+	label.text = str(health)
 	if randf() >= 0.5:
 		start_resting()
 	else:
@@ -60,4 +65,21 @@ func start_moving():
 	state = STATE.MOVE
 	await get_tree().create_timer(move_period_base).timeout
 	start_resting()
+
+
+
+func _on_hurtbox_area_entered(area):
+	# TODO this attacked the wood, not the soldiers and crashed
+	health -= area.get_parent().attack
+	if health <= 0:
+		die()
+	label.text = str(health)
+
+func die():
+	var wood_count = randi_range(3, 5)
+	for _i in range(wood_count):
+		var wood = WOOD_SCENE.instantiate()
+		get_tree().current_scene.add_child(wood)
+		wood.global_position = resource_spawn_point.global_position
+	queue_free()
 
