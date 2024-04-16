@@ -49,15 +49,15 @@ func _physics_process(_delta):
 			#state = STATE.ATTACK
 	match state:
 		STATE.MOVE:
-			print("moving")
+			#print("moving")
 			velocity.x = movement_speed
 			#animation_player.play('RESET')
 		STATE.REST:
-			print("resting")
+			#print("resting")
 			velocity.x = 0.0
 			#animation_player.play('RESET')
 		STATE.ATTACK:
-			print("attacking")
+			#print("attacking")
 			shoot()
 			#await get_tree().create_timer(3).timeout
 			#animation_player.play('attack')

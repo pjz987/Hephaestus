@@ -18,14 +18,3 @@ func _physics_process(delta):
 	velocity = Vector2(SPEED, 0).rotated(dir)
 	move_and_slide()
 
-
-
-func _on_area_2d_area_entered(area):
-	queue_free()
-	pass # Replace with function body.
-
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	#print("poof")
-	queue_free()
-	pass # Replace with function body.
