@@ -15,11 +15,16 @@ enum STATE {MOVE, REST, ATTACK}
 @export var attack_damage = 10
 
 
+var dsound = MasterAudio.get_child(0)
+var hitsound = MasterAudio.get_child(5)
+#var dsound = get_path()
+
+
 @onready var ray_cast_2d = $RayCast2D
 @onready var animation_player = $AnimationPlayer
 @onready var label = $Label
 @onready var resource_spawn_point = $ResourceSpawnPoint
-
+@onready var death_sound_player = $DeathSoundPlayer
 @onready var WOOD_SCENE = load('res://wood.tscn')
 
 
@@ -30,6 +35,7 @@ func _ready():
 		start_resting()
 	else:
 		start_moving()
+
 
 func _physics_process(_delta):
 	if ray_cast_2d.is_colliding():
@@ -71,6 +77,7 @@ func start_moving():
 func _on_hurtbox_area_entered(area):
 	# TODO this attacked the wood, not the soldiers and crashed
 	health -= area.get_parent().attack
+	area.get_parent().hitsound.play()
 	if health <= 0:
 		die()
 	label.text = str(health)
@@ -81,5 +88,11 @@ func die():
 		var wood = WOOD_SCENE.instantiate()
 		get_tree().current_scene.add_child(wood)
 		wood.global_position = resource_spawn_point.global_position
+	#death_sound_player.play()
+	
+	#print(death_sound_player.playing)
+	#await not death_sound_player.playing
+	#print("player should have played")
+	dsound.play()
 	queue_free()
-
+  

@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://cv6bexvroye4v"]
+
+[ext_resource type="Script" path="res://giant.gd" id="1_4qho0"]
+[ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_8vswq"]
+[ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_6gmam"]
+[ext_resource type="AudioStream" uid="uid://denttfosd8eyp" path="res://giant f 2.wav" id="4_d4n0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y037u"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxo4t"]
+size = Vector2(32, 64)
+
+[sub_resource type="Animation" id="Animation_ayo80"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, -55)]
+}
+
+[sub_resource type="Animation" id="Animation_hywkq"]
+resource_name = "attack"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-9, -55), Vector2(-22, -55), Vector2(-22, -6), Vector2(-5, -7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0t73t"]
+_data = {
+"RESET": SubResource("Animation_ayo80"),
+"attack": SubResource("Animation_hywkq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_654nm"]
+size = Vector2(32, 64)
+
+[node name="Giant" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_4qho0")
+
+[node name="Weapon" type="Area2D" parent="."]
+position = Vector2(-9, -55)
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+modulate = Color(0.45098, 1, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_8vswq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
+shape = SubResource("RectangleShape2D_y037u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_rxo4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0588235, 0.980392, 0.54902, 1)
+position = Vector2(0, -32)
+scale = Vector2(0.25, 0.5)
+texture = ExtResource("1_8vswq")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-16, -2)
+target_position = Vector2(-15, 2.08165e-12)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0t73t")
+}
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_654nm")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -8.0
+offset_top = -73.0
+offset_right = 8.0
+offset_bottom = -65.0
+theme = ExtResource("3_6gmam")
+text = "40
+"
+
+[node name="ResourceSpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, -41)
+
+[node name="DeathSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_d4n0d")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cagd604u2ujhx"]
+
+[ext_resource type="AudioStream" uid="uid://mqd0ualb8sqb" path="res://ESM_One_Shot_Vocal_Frost_Giant_Monster_Death_3_Human_Creature_Growl_Pain_Groan_Moan_Hurt.wav" id="1_7hplh"]
+[ext_resource type="AudioStream" uid="uid://bftj3gro356cq" path="res://ArrowRelease_BW.54284.wav" id="2_r7um7"]
+[ext_resource type="AudioStream" uid="uid://c7e0g780odmvt" path="res://ArrowImpactBody_BW.54275.wav" id="3_abaw5"]
+[ext_resource type="AudioStream" uid="uid://ck80btt5cx8dc" path="res://ESM_Fighting_Game_One_Shot_Designed_Combat_Hits_X_Ray_Hit_Sword_Spear_Slide_Slice_Slash_Attack.wav" id="4_uhfwx"]
+[ext_resource type="AudioStream" uid="uid://bfwbi8hn6ptgl" path="res://ESM_FG_FX_one_shot_farming_axe_chop_2_tool_wood_impact_whoosh.wav" id="5_th0j2"]
+[ext_resource type="AudioStream" uid="uid://dagw5d7euqv7" path="res://ESM_MU_FX_earth_whoosh_boulder_thowing_short_action_08.wav" id="6_4uhdd"]
+
+[node name="Node" type="Node"]
+
+[node name="DeathSoundPlayer-Giant" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_7hplh")
+volume_db = 14.703
+
+[node name="ArrowFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_r7um7")
+
+[node name="ArrowHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_abaw5")
+
+[node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_uhfwx")
+
+[node name="WoodGather" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_th0j2")
+
+[node name="BoulderHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_4uhdd")
+volume_db = 3.759
+pitch_scale = 0.76
