@@ -16,6 +16,7 @@ enum STATE {MOVE, REST, ATTACK}
 
 
 var dsound = MasterAudio.get_child(0)
+var hitsound = MasterAudio.get_child(5)
 #var dsound = get_path()
 
 
@@ -34,6 +35,7 @@ func _ready():
 		start_resting()
 	else:
 		start_moving()
+
 
 func _physics_process(_delta):
 	if ray_cast_2d.is_colliding():
@@ -75,6 +77,7 @@ func start_moving():
 func _on_hurtbox_area_entered(area):
 	# TODO this attacked the wood, not the soldiers and crashed
 	health -= area.get_parent().attack
+	area.get_parent().hitsound.play()
 	if health <= 0:
 		die()
 	label.text = str(health)

@@ -12,6 +12,7 @@ enum STATE {MOVE, REST, ATTACK}
 
 @export var max_health = 20
 @export var health: int
+var hitsound=MasterAudio.get_child(3)
 
 @export var attack = 2
 var is_hero: bool
@@ -50,6 +51,8 @@ func _physics_process(_delta):
 		STATE.ATTACK:
 			animation_player.play('attack')
 			velocity.x = 0.0
+			#hitsound.play() # think about hitsound workaround
+			print("melee hit!")
 	move_and_slide()
 			
 
@@ -69,6 +72,7 @@ func start_moving():
 
 
 func _on_hurtbox_area_entered(area):
+	area.get_parent().hitsound.play()
 	health -= 5
 	if health <= 0:
 		die()

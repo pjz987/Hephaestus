@@ -40,8 +40,8 @@ func _physics_process(delta):
 
 func _on_area_2d_area_entered(area):
 	
-	await get_tree().create_timer(0.01).timeout
-	hitsound.play()
+	await get_tree().create_timer(0.03).timeout
+	#hitsound.play()
 	queue_free()
 	
 	pass # Replace with function body.
