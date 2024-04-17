@@ -44,10 +44,10 @@ func _physics_process(_delta):
 	match state:
 		STATE.MOVE:
 			velocity.x = movement_speed
-			animation_player.play('RESET')
+			animation_player.play('walk')
 		STATE.REST:
 			velocity.x = 0.0
-			animation_player.play('RESET')
+			animation_player.play('idle')
 		STATE.ATTACK:
 			animation_player.play('attack')
 			velocity.x = 0.0

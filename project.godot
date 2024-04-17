@@ -34,3 +34,7 @@ window/stretch/mode="canvas_items"
 2d_physics/layer_2="giants"
 2d_physics/layer_3="resource"
 2d_physics/layer_4="floor"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

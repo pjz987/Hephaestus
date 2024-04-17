@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cf5uo5iltjxbx"]
+[gd_scene load_steps=13 format=3 uid="uid://cf5uo5iltjxbx"]
 
 [ext_resource type="Script" path="res://soldier.gd" id="1_co4ma"]
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_w104w"]
 [ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_578tl"]
+[ext_resource type="Texture2D" uid="uid://yq0kq5275gt8" path="res://hoplite.png" id="4_y0wcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc6hm"]
 size = Vector2(12, 25)
@@ -27,6 +28,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, -15)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hoplite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_bd1v3"]
 resource_name = "attack"
@@ -43,11 +56,58 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, -15), Vector2(12, -15), Vector2(0, -15)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hoplite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_6jqop"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hoplite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_67lil"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hoplite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_imfsu"]
 _data = {
 "RESET": SubResource("Animation_numkq"),
-"attack": SubResource("Animation_bd1v3")
+"attack": SubResource("Animation_bd1v3"),
+"idle": SubResource("Animation_6jqop"),
+"walk": SubResource("Animation_67lil")
 }
 
 [node name="Soldier" type="CharacterBody2D"]
@@ -59,6 +119,7 @@ position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_fc6hm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0, 0.74902, 1)
 position = Vector2(-4.76837e-07, -13)
 scale = Vector2(0.1, 0.2)
@@ -86,6 +147,7 @@ position = Vector2(0, -15)
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+visible = false
 modulate = Color(0.4, 0.4, 0.4, 1)
 scale = Vector2(0.1, 0.015)
 texture = ExtResource("1_w104w")
@@ -102,5 +164,11 @@ collision_mask = 2
 libraries = {
 "": SubResource("AnimationLibrary_imfsu")
 }
+
+[node name="Hoplite" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("4_y0wcw")
+hframes = 14
+frame = 1
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
