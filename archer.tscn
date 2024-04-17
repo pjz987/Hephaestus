@@ -1,14 +1,88 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpp3apj2i7jp7"]
+[gd_scene load_steps=12 format=3 uid="uid://cpp3apj2i7jp7"]
 
 [ext_resource type="Script" path="res://archer.gd" id="1_w1eyd"]
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="2_cfws5"]
 [ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_knuly"]
+[ext_resource type="Texture2D" uid="uid://b8hltjbbi3lwi" path="res://artemis.png" id="4_6mklv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc6hm"]
 size = Vector2(12, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t0s6b"]
 size = Vector2(10, 24)
+
+[sub_resource type="Animation" id="Animation_viv1l"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArcherSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hg1xj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArcherSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5sjil"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArcherSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_87vm1"]
+resource_name = "attack"
+loop_mode = 2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArcherSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rp0cc"]
+_data = {
+"RESET": SubResource("Animation_hg1xj"),
+"attack": SubResource("Animation_87vm1"),
+"idle": SubResource("Animation_viv1l"),
+"walk": SubResource("Animation_5sjil")
+}
 
 [node name="differentsoldier" type="CharacterBody2D"]
 collision_mask = 2
@@ -19,6 +93,7 @@ position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_fc6hm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.635294, 0.670588, 0.168627, 1)
 position = Vector2(-4.76837e-07, -13)
 scale = Vector2(0.1, 0.2)
@@ -47,6 +122,9 @@ target_position = Vector2(146, 0)
 collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rp0cc")
+}
 
 [node name="ArrowSpawnPointOld" type="Sprite2D" parent="."]
 position = Vector2(3, -17)
@@ -57,5 +135,10 @@ one_shot = true
 
 [node name="ArrowSpawnPoint" type="Area2D" parent="."]
 position = Vector2(5, -17)
+
+[node name="ArcherSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("4_6mklv")
+hframes = 13
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
