@@ -37,6 +37,7 @@ func _ready():
 		start_moving()
 
 func _physics_process(_delta):
+	#print(global_position)
 	if ray_cast_2d.is_colliding():
 		state = STATE.ATTACK
 	match state:

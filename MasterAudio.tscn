@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cagd604u2ujhx"]
+
+[ext_resource type="AudioStream" uid="uid://denttfosd8eyp" path="res://giant f 2.wav" id="1_yfgxp"]
+[ext_resource type="AudioStream" uid="uid://bftj3gro356cq" path="res://ArrowRelease_BW.54284.wav" id="2_r7um7"]
+[ext_resource type="AudioStream" uid="uid://c7e0g780odmvt" path="res://ArrowImpactBody_BW.54275.wav" id="3_abaw5"]
+
+[node name="Node" type="Node"]
+
+[node name="DeathSoundPlayer-Giant" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_yfgxp")
+
+[node name="ArrowFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_r7um7")
+
+[node name="ArrowHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_abaw5")
+
+[node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_abaw5")

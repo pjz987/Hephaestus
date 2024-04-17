@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cv6bexvroye4v"]
+[gd_scene load_steps=11 format=3 uid="uid://cv6bexvroye4v"]
 
 [ext_resource type="Script" path="res://giant.gd" id="1_4qho0"]
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_8vswq"]
 [ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_6gmam"]
+[ext_resource type="AudioStream" uid="uid://denttfosd8eyp" path="res://giant f 2.wav" id="4_d4n0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y037u"]
 size = Vector2(12, 12)
@@ -105,5 +106,8 @@ text = "40
 
 [node name="ResourceSpawnPoint" type="Node2D" parent="."]
 position = Vector2(0, -41)
+
+[node name="DeathSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_d4n0d")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

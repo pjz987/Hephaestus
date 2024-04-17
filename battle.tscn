@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cf5uo5iltjxbx" path="res://soldier.tscn" id="3_lpfun"]
 [ext_resource type="PackedScene" uid="uid://c3xctb61ngcat" path="res://ui.tscn" id="4_ode7y"]
 [ext_resource type="PackedScene" uid="uid://bj3fwj0k6asmk" path="res://wood.tscn" id="6_kyfsu"]
-[ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://differentsoldier.tscn" id="7_uu4jg"]
+[ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://archer.tscn" id="7_uu4jg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2hoq"]
 size = Vector2(320.5, 34)
@@ -57,7 +57,7 @@ shape = SubResource("RectangleShape2D_w2hoq")
 [node name="Wood" parent="." instance=ExtResource("6_kyfsu")]
 position = Vector2(164, 86)
 
-[node name="differentsoldier" parent="." instance=ExtResource("7_uu4jg")]
+[node name="archer0" parent="." instance=ExtResource("7_uu4jg")]
 position = Vector2(92, 180)
 
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
