@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cy73dc8nf5c4w"]
+[gd_scene load_steps=10 format=3 uid="uid://cy73dc8nf5c4w"]
 
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_1u7h3"]
 [ext_resource type="Script" path="res://battle.gd" id="1_i40am"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3xctb61ngcat" path="res://ui.tscn" id="4_ode7y"]
 [ext_resource type="PackedScene" uid="uid://bj3fwj0k6asmk" path="res://wood.tscn" id="6_kyfsu"]
 [ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://archer.tscn" id="7_uu4jg"]
+[ext_resource type="Texture2D" uid="uid://c334c2032xpg4" path="res://volcano.png" id="8_i85ey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2hoq"]
 size = Vector2(320.5, 34)
@@ -59,6 +60,11 @@ position = Vector2(164, 86)
 
 [node name="archer0" parent="." instance=ExtResource("7_uu4jg")]
 position = Vector2(92, 180)
+
+[node name="Volcano" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(64, 116)
+texture = ExtResource("8_i85ey")
 
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
 [connection signal="button_down" from="UI/SpawnGiantButton" to="." method="_on_spawn_giant_button_button_down"]
