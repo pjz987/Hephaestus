@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy73dc8nf5c4w"]
+[gd_scene load_steps=12 format=3 uid="uid://cy73dc8nf5c4w"]
 
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_1u7h3"]
 [ext_resource type="Script" path="res://battle.gd" id="1_i40am"]
+[ext_resource type="Texture2D" uid="uid://c0u2bg1rjf775" path="res://background.png" id="2_0q5tu"]
 [ext_resource type="PackedScene" uid="uid://cv6bexvroye4v" path="res://giant.tscn" id="2_v0u1n"]
 [ext_resource type="PackedScene" uid="uid://cf5uo5iltjxbx" path="res://soldier.tscn" id="3_lpfun"]
 [ext_resource type="PackedScene" uid="uid://c3xctb61ngcat" path="res://ui.tscn" id="4_ode7y"]
 [ext_resource type="PackedScene" uid="uid://bj3fwj0k6asmk" path="res://wood.tscn" id="6_kyfsu"]
 [ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://archer.tscn" id="7_uu4jg"]
 [ext_resource type="Texture2D" uid="uid://c334c2032xpg4" path="res://volcano.png" id="8_i85ey"]
+[ext_resource type="Texture2D" uid="uid://hpfcvjnlupa7" path="res://temple.png" id="10_8oj7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2hoq"]
 size = Vector2(320.5, 34)
@@ -16,13 +18,12 @@ size = Vector2(320.5, 34)
 script = ExtResource("1_i40am")
 
 [node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0.270588, 0.270588, 0.270588, 0.490196)
 z_index = -1
-scale = Vector2(2.5, 1.40625)
-texture = ExtResource("1_1u7h3")
+texture = ExtResource("2_0q5tu")
 centered = false
 
 [node name="Forge" type="Node2D" parent="."]
+visible = false
 z_index = 1
 
 [node name="Icon" type="Sprite2D" parent="Forge"]
@@ -41,7 +42,7 @@ position = Vector2(184, 180)
 [node name="UI" parent="." instance=ExtResource("4_ode7y")]
 
 [node name="SoldierSpawnPoint" type="Node2D" parent="."]
-position = Vector2(44, 180)
+position = Vector2(-9, 180)
 
 [node name="GiantSpawnPoint" type="Node2D" parent="."]
 position = Vector2(338, 180)
@@ -58,13 +59,23 @@ shape = SubResource("RectangleShape2D_w2hoq")
 [node name="Wood" parent="." instance=ExtResource("6_kyfsu")]
 position = Vector2(164, 86)
 
+[node name="Wood2" parent="." instance=ExtResource("6_kyfsu")]
+position = Vector2(133, 86)
+
+[node name="Wood3" parent="." instance=ExtResource("6_kyfsu")]
+position = Vector2(205, 86)
+
 [node name="archer0" parent="." instance=ExtResource("7_uu4jg")]
 position = Vector2(92, 180)
 
 [node name="Volcano" type="Sprite2D" parent="."]
-z_index = 1
 position = Vector2(64, 116)
 texture = ExtResource("8_i85ey")
+
+[node name="Temple" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(64, 116)
+texture = ExtResource("10_8oj7x")
 
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
 [connection signal="button_down" from="UI/SpawnGiantButton" to="." method="_on_spawn_giant_button_button_down"]

@@ -1,3 +1,4 @@
+class_name Wood
 extends RigidBody2D
 
 @export var min_impulse_speed: int

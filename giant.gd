@@ -1,3 +1,4 @@
+class_name Giant
 extends CharacterBody2D
 
 @export var movement_speed = 10
@@ -43,10 +44,10 @@ func _physics_process(_delta):
 	match state:
 		STATE.MOVE:
 			velocity.x = -movement_speed
-			animation_player.play('RESET')
+			animation_player.play('walk')
 		STATE.REST:
 			velocity.x = 0.0
-			animation_player.play('RESET')
+			animation_player.play('idle')
 		STATE.ATTACK:
 			velocity.x = 0.0
 			animation_player.play('attack')
@@ -76,6 +77,7 @@ func start_moving():
 
 func _on_hurtbox_area_entered(area):
 	# TODO this attacked the wood, not the soldiers and crashed
+	print(area.get_parent())
 	health -= area.get_parent().attack
 	area.get_parent().hitsound.play()
 	if health <= 0:

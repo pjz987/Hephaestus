@@ -1,3 +1,4 @@
+class_name Archer
 extends CharacterBody2D
 
 @export var movement_speed = 15
