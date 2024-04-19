@@ -77,7 +77,8 @@ func start_moving():
 
 func _on_hurtbox_area_entered(area):
 	# TODO this attacked the wood, not the soldiers and crashed
-	print(area.get_parent())
+	print(self, collision_layer, collision_mask)
+	print(area, area.collision_layer, area.collision_mask)
 	health -= area.get_parent().attack
 	area.get_parent().hitsound.play()
 	if health <= 0:
