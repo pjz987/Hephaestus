@@ -77,7 +77,12 @@ z_index = 1
 position = Vector2(64, 116)
 texture = ExtResource("10_8oj7x")
 
+[node name="GiantSpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
 [connection signal="button_down" from="UI/SpawnGiantButton" to="." method="_on_spawn_giant_button_button_down"]
+[connection signal="timeout" from="GiantSpawnTimer" to="." method="_on_giant_spawn_timer_timeout"]
 
 [editable path="UI"]
