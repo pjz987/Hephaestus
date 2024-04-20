@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ebgos4jkqq7m"]
+
+[ext_resource type="Script" path="res://stone.gd" id="1_logph"]
+[ext_resource type="Texture2D" uid="uid://cipet415ffalu" path="res://stone.png" id="2_nn1nj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84vhc"]
+size = Vector2(12, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mh1y4"]
+radius = 13.0
+
+[node name="Stone" type="RigidBody2D"]
+z_index = 2
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_logph")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.576471, 0.0901961, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_nn1nj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_84vhc")
+
+[node name="MousePickupArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MousePickupArea"]
+shape = SubResource("CircleShape2D_mh1y4")
+
+[connection signal="mouse_entered" from="MousePickupArea" to="." method="_on_mouse_pickup_area_mouse_entered"]
