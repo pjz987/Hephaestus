@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 500
-@export var ARC = -100
+#@export var SPEED = 500
+@export var SPEED = 415
+@export var ARC = -20
 
 var attack = 10
 var dir : float
@@ -15,7 +16,9 @@ var hitsound=MasterAudio.get_child(2)
 #@export var arc_force = -700
 
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")/2
+#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")/2
+#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")/8
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")/8
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

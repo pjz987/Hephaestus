@@ -52,7 +52,7 @@ func _physics_process(_delta):
 			animation_player.play('attack')
 			velocity.x = 0.0
 			#hitsound.play() # think about hitsound workaround
-			print("melee hit!")
+			#print("melee hit!")
 	move_and_slide()
 			
 

@@ -51,14 +51,18 @@ func _physics_process(_delta):
 		STATE.MOVE:
 			#print("moving")
 			velocity.x = movement_speed
-			#animation_player.play('RESET')
+			animation_player.play('walk')
 		STATE.REST:
 			#print("resting")
+			animation_player.play('idle')
 			velocity.x = 0.0
 			#animation_player.play('RESET')
 		STATE.ATTACK:
 			#print("attacking")
+			#await get_tree().create_timer(.3).timeout
 			shoot()
+			#await get_tree().create_timer(1).timeout
+			#animation_player.play('RESET')
 			#await get_tree().create_timer(3).timeout
 			#animation_player.play('attack')
 			velocity.x = 0.0 # will this be redundant? and should is go before shoot?
@@ -105,13 +109,20 @@ func shoot():
 	#state = STATE.RELOAD
 	state = STATE.REST
 	if reload_timer.time_left == 0:
+		animation_player.play('attack')
 		reload_timer.start()
+		await get_tree().create_timer(.6).timeout
+		#if animation_player.current_animation_position == .6:
 		var instance = projectile.instantiate()
 	
 		instance.dir = rotation
 		instance.spawnPos = arrow_spawn_point.global_position
 		instance.spawnRot = rotation
 		main.add_child.call_deferred(instance)
+	else:
+		if not animation_player.is_playing():
+			animation_player.play('idle2')
+			print("idling")
 		#var arrow = main.add_child.call_deferred(instance)
 		#arrow.damage = arrow_damage
 	#await get_tree().create_timer(reload_period_base).timeout
