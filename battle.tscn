@@ -1,15 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://cy73dc8nf5c4w"]
+[gd_scene load_steps=13 format=3 uid="uid://cy73dc8nf5c4w"]
 
-[ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_1u7h3"]
 [ext_resource type="Script" path="res://battle.gd" id="1_i40am"]
 [ext_resource type="Texture2D" uid="uid://c0u2bg1rjf775" path="res://background.png" id="2_0q5tu"]
 [ext_resource type="PackedScene" uid="uid://cv6bexvroye4v" path="res://giant.tscn" id="2_v0u1n"]
 [ext_resource type="PackedScene" uid="uid://cf5uo5iltjxbx" path="res://soldier.tscn" id="3_lpfun"]
 [ext_resource type="PackedScene" uid="uid://c3xctb61ngcat" path="res://ui.tscn" id="4_ode7y"]
 [ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="7_t4m8r"]
-[ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://archer.tscn" id="7_uu4jg"]
 [ext_resource type="FontFile" uid="uid://batyxbiub3ddj" path="res://prstart.ttf" id="8_anwfa"]
 [ext_resource type="Texture2D" uid="uid://c334c2032xpg4" path="res://volcano.png" id="8_i85ey"]
+[ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://archer.tscn" id="9_ssi2e"]
 [ext_resource type="Texture2D" uid="uid://hpfcvjnlupa7" path="res://temple.png" id="10_8oj7x"]
 
 [sub_resource type="FontVariation" id="FontVariation_brvwi"]
@@ -27,22 +26,8 @@ z_index = -1
 texture = ExtResource("2_0q5tu")
 centered = false
 
-[node name="Forge" type="Node2D" parent="."]
-visible = false
-z_index = 1
-
-[node name="Icon" type="Sprite2D" parent="Forge"]
-modulate = Color(0.960784, 0.298039, 0.211765, 1)
-position = Vector2(0, 116)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_1u7h3")
-centered = false
-
 [node name="Giant" parent="." instance=ExtResource("2_v0u1n")]
 position = Vector2(288, 180)
-
-[node name="Soldier5" parent="." instance=ExtResource("3_lpfun")]
-position = Vector2(184, 180)
 
 [node name="UI" parent="." instance=ExtResource("4_ode7y")]
 
@@ -96,12 +81,21 @@ collision_mask = 0
 position = Vector2(160.75, 17)
 shape = SubResource("RectangleShape2D_w2hoq")
 
-[node name="archer0" parent="." instance=ExtResource("7_uu4jg")]
-position = Vector2(92, 180)
-
 [node name="Volcano" type="Sprite2D" parent="."]
 position = Vector2(64, 116)
 texture = ExtResource("8_i85ey")
+
+[node name="Soldier" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(83, 180)
+
+[node name="Soldier2" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(119, 180)
+
+[node name="Soldier3" parent="." instance=ExtResource("3_lpfun")]
+position = Vector2(154, 180)
+
+[node name="Archer" parent="." instance=ExtResource("9_ssi2e")]
+position = Vector2(21, 180)
 
 [node name="Temple" type="Sprite2D" parent="."]
 z_index = 1
@@ -109,7 +103,7 @@ position = Vector2(64, 116)
 texture = ExtResource("10_8oj7x")
 
 [node name="GiantSpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 12.0
 autostart = true
 
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]

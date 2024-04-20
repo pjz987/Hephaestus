@@ -17,15 +17,16 @@ enum STATE {MOVE, REST, ATTACK, RELOAD}
 @export var attack = 2
 var is_hero: bool
 
-@onready var sprite_2d = $Sprite2D
 @onready var label = $Label
 @onready var ray_cast_2d = $RayCast2D
 @onready var animation_player = $AnimationPlayer
 @onready var main = get_tree().get_root().get_node("Battle") # play with this
 @onready var projectile = load("res://arrow.tscn")
+@onready var BLOOD_SCENE = load('res://blood.tscn')
 @onready var arrow_spawn_point = $ArrowSpawnPoint
 @onready var reload_timer = $ReloadTimer
 @onready var arrow_sprite = $ArrowSprite
+@onready var blood_spawn_point = $BloodSpawnPoint
 @onready var arrow_damage = 10
 
 func _ready():
@@ -84,7 +85,6 @@ func _physics_process(_delta):
 
 func start_resting():
 	state = STATE.REST
-	print(rest_period_base, rest_period_randomness)
 	var rest_period = randf_range(
 		rest_period_base * 1 - rest_period_randomness,
 		rest_period_base * 1 + rest_period_randomness
@@ -116,6 +116,10 @@ func _on_hurtbox_area_entered(area):
 	label.text = str(health)
 
 func die():
+	var blood = BLOOD_SCENE.instantiate()
+	get_tree().current_scene.add_child(blood)
+	blood.global_position = blood_spawn_point.global_position
+	blood.emitting = true
 	queue_free()
 	
 
@@ -141,7 +145,7 @@ func shoot():
 	else:
 		if not animation_player.is_playing():
 			animation_player.play('idle2')
-			print("idling")
+			#print("idling")
 		#var arrow = main.add_child.call_deferred(instance)
 		#arrow.damage = arrow_damage
 	#await get_tree().create_timer(reload_period_base).timeout

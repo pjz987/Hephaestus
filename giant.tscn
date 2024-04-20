@@ -10,7 +10,7 @@
 size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxo4t"]
-size = Vector2(32, 64)
+size = Vector2(24, 64)
 
 [sub_resource type="Animation" id="Animation_ayo80"]
 length = 0.001
@@ -51,7 +51,7 @@ tracks/0/path = NodePath("Weapon:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 1),
+"times": PackedFloat32Array(0, 0.4, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-9, -55), Vector2(-22, -55), Vector2(-22, -6), Vector2(-5, -7)]
@@ -84,6 +84,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, -55)]
+}
 
 [sub_resource type="Animation" id="Animation_48oai"]
 resource_name = "walk"
@@ -101,6 +113,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 7, 8]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, -55)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0t73t"]
 _data = {
@@ -111,7 +135,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_654nm"]
-size = Vector2(32, 64)
+size = Vector2(24, 64)
 
 [node name="Giant" type="CharacterBody2D"]
 collision_layer = 2
@@ -140,7 +164,7 @@ texture = ExtResource("3_3qij8")
 hframes = 16
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-16, -2)
+position = Vector2(-12, -2)
 target_position = Vector2(-10, 2.08165e-12)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -171,5 +195,8 @@ position = Vector2(0, -41)
 [node name="DeathSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_d4n0d")
 volume_db = 3.133
+
+[node name="BloodSpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, -37)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
