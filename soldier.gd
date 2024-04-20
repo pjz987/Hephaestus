@@ -5,30 +5,32 @@ extends CharacterBody2D
 
 enum STATE {MOVE, REST, ATTACK}
 @export var state = STATE.MOVE
-@export var rest_period_base = 1.0
+@export var rest_period_base = 0.75
 @export var rest_period_randomness = 0.2
-@export var move_period_base = 3.0
+@export var move_period_base = 3.5
 @export var move_period_randomness = 0.2
 
-@export var max_health = 20
+@export var max_health = 40
 @export var health: int
 var hitsound=MasterAudio.get_child(3)
 
-@export var attack = 2
+@export var attack = 1
 var is_hero: bool
 
 @onready var sprite_2d = $Sprite2D
 @onready var label = $Label
 @onready var ray_cast_2d = $RayCast2D
 @onready var animation_player = $AnimationPlayer
+@onready var blood_spawn_point = $BloodSpawnPoint
+
+@onready var BLOOD_SCENE = load('res://blood.tscn')
 
 func _ready():
-	is_hero = randf() > 0.8
+	is_hero = randf() > 0.85
 	health = max_health
 	if is_hero:
-		health *= 2
-		attack *= 2
-		sprite_2d.modulate = Color(0.8, 0.9, 0.5, 1.0)
+		health *= 1.5
+		attack *= 3
 		scale *= 1.5
 		
 	label.text = str(health)
@@ -59,7 +61,6 @@ func _physics_process(_delta):
 
 func start_resting():
 	state = STATE.REST
-	print(rest_period_base, rest_period_randomness)
 	var rest_period = randf_range(
 		rest_period_base * 1 - rest_period_randomness,
 		rest_period_base * 1 + rest_period_randomness
@@ -86,4 +87,8 @@ func _on_hurtbox_area_entered(area):
 	label.text = str(health)
 
 func die():
+	var blood = BLOOD_SCENE.instantiate()
+	get_tree().current_scene.add_child(blood)
+	blood.global_position = blood_spawn_point.global_position
+	blood.emitting = true
 	queue_free()

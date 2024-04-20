@@ -4,8 +4,9 @@ extends CharacterBody2D
 #@export var SPEED = 500
 @export var SPEED = 415
 @export var ARC = -20
+@onready var area_2d = $Area2D
 
-var attack = 10
+var attack = 5
 var dir : float
 var spawnPos : Vector2
 var spawnRot : float
@@ -42,8 +43,7 @@ func _physics_process(delta):
 
 
 func _on_area_2d_area_entered(area):
-	
-	await get_tree().create_timer(0.03).timeout
+	#await get_tree().create_timer(0.01).timeout
 	#hitsound.play()
 	queue_free()
 	

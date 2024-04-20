@@ -171,4 +171,7 @@ texture = ExtResource("4_y0wcw")
 hframes = 14
 frame = 1
 
+[node name="BloodSpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

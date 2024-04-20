@@ -26,8 +26,10 @@ var hitsound = MasterAudio.get_child(5)
 @onready var label = $Label
 @onready var resource_spawn_point = $ResourceSpawnPoint
 @onready var death_sound_player = $DeathSoundPlayer
+@onready var blood_spawn_point = $BloodSpawnPoint
 @onready var WOOD_SCENE = load('res://wood.tscn')
 @onready var STONE_SCENE = load('res://stone.tscn')
+@onready var BLOOD_SCENE = load('res://blood.tscn')
 
 
 func _ready():
@@ -64,7 +66,6 @@ func attack():
 
 func start_resting():
 	state = STATE.REST
-	print(rest_period_base, rest_period_randomness)
 	var rest_period = randf_range(
 		rest_period_base * 1 - rest_period_randomness,
 		rest_period_base * 1 + rest_period_randomness
@@ -84,9 +85,6 @@ func start_moving():
 
 
 func _on_hurtbox_area_entered(area):
-	# TODO this attacked the wood, not the soldiers and crashed
-	print(self, collision_layer, collision_mask)
-	print(area, area.collision_layer, area.collision_mask)
 	health -= area.get_parent().attack
 	area.get_parent().hitsound.play()
 	if health <= 0:
@@ -94,7 +92,8 @@ func _on_hurtbox_area_entered(area):
 	label.text = str(health)
 
 func die():
-	var wood_count = randi_range(0, 2)
+	GameManager.giant_kill()
+	var wood_count = randi_range(3, 4)
 	for _i in range(wood_count):
 		var wood = WOOD_SCENE.instantiate()
 		get_tree().current_scene.add_child(wood)
@@ -104,7 +103,12 @@ func die():
 		var stone = STONE_SCENE.instantiate()
 		get_tree().current_scene.add_child(stone)
 		stone.global_position = resource_spawn_point.global_position
-		
+	
+	var blood = BLOOD_SCENE.instantiate()
+	get_tree().current_scene.add_child(blood)
+	blood.global_position = blood_spawn_point.global_position
+	blood.emitting = true
+	
 	#death_sound_player.play()
 	
 	#print(death_sound_player.playing)
