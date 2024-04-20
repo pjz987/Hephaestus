@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpp3apj2i7jp7"]
+[gd_scene load_steps=13 format=3 uid="uid://cpp3apj2i7jp7"]
 
 [ext_resource type="Script" path="res://archer.gd" id="1_w1eyd"]
 [ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_knuly"]
 [ext_resource type="Texture2D" uid="uid://b8hltjbbi3lwi" path="res://artemis.png" id="4_6mklv"]
+[ext_resource type="Texture2D" uid="uid://dpq1266tosn18" path="res://arrow.png" id="4_oxcsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc6hm"]
 size = Vector2(12, 25)
@@ -144,5 +145,9 @@ position = Vector2(5, -17)
 position = Vector2(0, -13)
 texture = ExtResource("4_6mklv")
 hframes = 13
+
+[node name="ArrowSprite" type="Sprite2D" parent="."]
+position = Vector2(5, -18)
+texture = ExtResource("4_oxcsb")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
