@@ -41,6 +41,9 @@ position = Vector2(184, 180)
 
 [node name="UI" parent="." instance=ExtResource("4_ode7y")]
 
+[node name="SpawnGiantButton" parent="UI" index="1"]
+visible = false
+
 [node name="SoldierSpawnPoint" type="Node2D" parent="."]
 position = Vector2(-9, 180)
 

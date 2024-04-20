@@ -63,14 +63,21 @@ func attack():
 
 func start_resting():
 	state = STATE.REST
-	#var rest_period_randomness_factor = 
-	#var rest_period = rest_period_base 
-	await get_tree().create_timer(rest_period_base).timeout
+	print(rest_period_base, rest_period_randomness)
+	var rest_period = randf_range(
+		rest_period_base * 1 - rest_period_randomness,
+		rest_period_base * 1 + rest_period_randomness
+	)
+	await get_tree().create_timer(rest_period).timeout
 	start_moving()
 	
 func start_moving():
 	state = STATE.MOVE
-	await get_tree().create_timer(move_period_base).timeout
+	var move_period = randf_range(
+		move_period_base * 1 - move_period_randomness,
+		move_period_base * 1 + move_period_randomness
+	)
+	await get_tree().create_timer(move_period).timeout
 	start_resting()
 
 
@@ -86,7 +93,7 @@ func _on_hurtbox_area_entered(area):
 	label.text = str(health)
 
 func die():
-	var wood_count = randi_range(3, 5)
+	var wood_count = randi_range(0, 2)
 	for _i in range(wood_count):
 		var wood = WOOD_SCENE.instantiate()
 		get_tree().current_scene.add_child(wood)

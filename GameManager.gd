@@ -13,8 +13,8 @@ signal resource_change
 
 
 
-func resource_spend(resource_name):
-	resources[resource_name] -= 1
+func resource_spend(resource_name: String, amount: int):
+	resources[resource_name] -= amount
 	resource_change.emit()
 
 func resource_pickup(resource_name):
