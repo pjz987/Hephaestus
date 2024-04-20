@@ -1,26 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj3fwj0k6asmk"]
+[gd_scene load_steps=5 format=3 uid="uid://ebgos4jkqq7m"]
 
-[ext_resource type="Script" path="res://wood.gd" id="1_v0bov"]
-[ext_resource type="Texture2D" uid="uid://bjyr05pho3phb" path="res://wood.png" id="2_3vt1u"]
+[ext_resource type="Script" path="res://stone.gd" id="1_logph"]
+[ext_resource type="Texture2D" uid="uid://cipet415ffalu" path="res://stone.png" id="2_nn1nj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84vhc"]
-size = Vector2(10, 8)
+size = Vector2(12, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mh1y4"]
 radius = 13.0
 
-[node name="Wood" type="RigidBody2D"]
+[node name="Stone" type="RigidBody2D"]
 z_index = 2
 collision_layer = 4
 collision_mask = 8
-script = ExtResource("1_v0bov")
-min_impulse_speed = 150
-max_impulse_speed = 10
+script = ExtResource("1_logph")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.576471, 0.0901961, 1)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_3vt1u")
+texture = ExtResource("2_nn1nj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_84vhc")

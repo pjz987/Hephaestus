@@ -1,3 +1,4 @@
+class_name Giant
 extends CharacterBody2D
 
 @export var movement_speed = 10
@@ -26,6 +27,7 @@ var hitsound = MasterAudio.get_child(5)
 @onready var resource_spawn_point = $ResourceSpawnPoint
 @onready var death_sound_player = $DeathSoundPlayer
 @onready var WOOD_SCENE = load('res://wood.tscn')
+@onready var STONE_SCENE = load('res://stone.tscn')
 
 
 func _ready():
@@ -43,10 +45,10 @@ func _physics_process(_delta):
 	match state:
 		STATE.MOVE:
 			velocity.x = -movement_speed
-			animation_player.play('RESET')
+			animation_player.play('walk')
 		STATE.REST:
 			velocity.x = 0.0
-			animation_player.play('RESET')
+			animation_player.play('idle')
 		STATE.ATTACK:
 			velocity.x = 0.0
 			animation_player.play('attack')
@@ -62,20 +64,29 @@ func attack():
 
 func start_resting():
 	state = STATE.REST
-	#var rest_period_randomness_factor = 
-	#var rest_period = rest_period_base 
-	await get_tree().create_timer(rest_period_base).timeout
+	print(rest_period_base, rest_period_randomness)
+	var rest_period = randf_range(
+		rest_period_base * 1 - rest_period_randomness,
+		rest_period_base * 1 + rest_period_randomness
+	)
+	await get_tree().create_timer(rest_period).timeout
 	start_moving()
 	
 func start_moving():
 	state = STATE.MOVE
-	await get_tree().create_timer(move_period_base).timeout
+	var move_period = randf_range(
+		move_period_base * 1 - move_period_randomness,
+		move_period_base * 1 + move_period_randomness
+	)
+	await get_tree().create_timer(move_period).timeout
 	start_resting()
 
 
 
 func _on_hurtbox_area_entered(area):
 	# TODO this attacked the wood, not the soldiers and crashed
+	print(self, collision_layer, collision_mask)
+	print(area, area.collision_layer, area.collision_mask)
 	health -= area.get_parent().attack
 	area.get_parent().hitsound.play()
 	if health <= 0:
@@ -83,11 +94,17 @@ func _on_hurtbox_area_entered(area):
 	label.text = str(health)
 
 func die():
-	var wood_count = randi_range(3, 5)
+	var wood_count = randi_range(0, 2)
 	for _i in range(wood_count):
 		var wood = WOOD_SCENE.instantiate()
 		get_tree().current_scene.add_child(wood)
 		wood.global_position = resource_spawn_point.global_position
+	var stone_count = randi_range(0, 1)
+	for _i in range(stone_count):
+		var stone = STONE_SCENE.instantiate()
+		get_tree().current_scene.add_child(stone)
+		stone.global_position = resource_spawn_point.global_position
+		
 	#death_sound_player.play()
 	
 	#print(death_sound_player.playing)

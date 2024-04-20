@@ -1,4 +1,4 @@
-class_name Wood
+class_name Stone
 extends RigidBody2D
 
 @export var min_impulse_speed: int
@@ -14,6 +14,6 @@ func _ready():
 
 func _on_mouse_pickup_area_mouse_entered():
 	#GameManager.resource_pickup(GameManager.RESOURCE.WOOD)
-	GameManager.resource_pickup('wood')
+	GameManager.resource_pickup('stone')
 	gsound.play()
 	queue_free()
