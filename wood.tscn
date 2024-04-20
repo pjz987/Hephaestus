@@ -1,12 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj3fwj0k6asmk"]
+[gd_scene load_steps=5 format=3 uid="uid://bj3fwj0k6asmk"]
 
-[ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_3htp1"]
-[ext_resource type="Shader" path="res://wood.gdshader" id="1_ll7a6"]
 [ext_resource type="Script" path="res://wood.gd" id="1_v0bov"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn42y"]
-shader = ExtResource("1_ll7a6")
-shader_parameter/color = Color(0.65098, 0.227451, 0.0588235, 1)
+[ext_resource type="Texture2D" uid="uid://bjyr05pho3phb" path="res://wood.png" id="2_3vt1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84vhc"]
 size = Vector2(10, 8)
@@ -15,6 +10,7 @@ size = Vector2(10, 8)
 radius = 13.0
 
 [node name="Wood" type="RigidBody2D"]
+z_index = 2
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("1_v0bov")
@@ -23,9 +19,8 @@ max_impulse_speed = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.576471, 0.0901961, 1)
-material = SubResource("ShaderMaterial_rn42y")
-scale = Vector2(0.078125, 0.0625)
-texture = ExtResource("1_3htp1")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_3vt1u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_84vhc")
