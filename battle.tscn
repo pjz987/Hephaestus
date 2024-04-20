@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy73dc8nf5c4w"]
+[gd_scene load_steps=14 format=3 uid="uid://cy73dc8nf5c4w"]
 
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_1u7h3"]
 [ext_resource type="Script" path="res://battle.gd" id="1_i40am"]
@@ -6,10 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://cv6bexvroye4v" path="res://giant.tscn" id="2_v0u1n"]
 [ext_resource type="PackedScene" uid="uid://cf5uo5iltjxbx" path="res://soldier.tscn" id="3_lpfun"]
 [ext_resource type="PackedScene" uid="uid://c3xctb61ngcat" path="res://ui.tscn" id="4_ode7y"]
-[ext_resource type="PackedScene" uid="uid://bj3fwj0k6asmk" path="res://wood.tscn" id="6_kyfsu"]
+[ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="7_t4m8r"]
 [ext_resource type="PackedScene" uid="uid://cpp3apj2i7jp7" path="res://archer.tscn" id="7_uu4jg"]
+[ext_resource type="FontFile" uid="uid://batyxbiub3ddj" path="res://prstart.ttf" id="8_anwfa"]
 [ext_resource type="Texture2D" uid="uid://c334c2032xpg4" path="res://volcano.png" id="8_i85ey"]
 [ext_resource type="Texture2D" uid="uid://hpfcvjnlupa7" path="res://temple.png" id="10_8oj7x"]
+
+[sub_resource type="FontVariation" id="FontVariation_brvwi"]
+base_font = ExtResource("8_anwfa")
+spacing_top = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2hoq"]
 size = Vector2(320.5, 34)
@@ -41,10 +46,42 @@ position = Vector2(184, 180)
 
 [node name="UI" parent="." instance=ExtResource("4_ode7y")]
 
+[node name="SpawnSoldierButton" parent="UI" index="0"]
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+text = "Craft
+Spear"
+
 [node name="SpawnGiantButton" parent="UI" index="1"]
 visible = false
 
+[node name="ResourcesLabel" parent="UI" index="2"]
+offset_left = 129.0
+offset_right = 193.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+text = "Wood : 0
+Stone: 0"
+
+[node name="SpawnArcherButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 16.0
+offset_right = 312.0
+offset_bottom = 42.0
+theme = ExtResource("7_t4m8r")
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+theme_override_fonts/font = SubResource("FontVariation_brvwi")
+text = "Craft
+Bow"
+
 [node name="SoldierSpawnPoint" type="Node2D" parent="."]
+position = Vector2(-9, 180)
+
+[node name="ArcherSpawnPoint" type="Node2D" parent="."]
 position = Vector2(-9, 180)
 
 [node name="GiantSpawnPoint" type="Node2D" parent="."]
@@ -58,15 +95,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(160.75, 17)
 shape = SubResource("RectangleShape2D_w2hoq")
-
-[node name="Wood" parent="." instance=ExtResource("6_kyfsu")]
-position = Vector2(164, 86)
-
-[node name="Wood2" parent="." instance=ExtResource("6_kyfsu")]
-position = Vector2(133, 86)
-
-[node name="Wood3" parent="." instance=ExtResource("6_kyfsu")]
-position = Vector2(205, 86)
 
 [node name="archer0" parent="." instance=ExtResource("7_uu4jg")]
 position = Vector2(92, 180)
@@ -86,6 +114,7 @@ autostart = true
 
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
 [connection signal="button_down" from="UI/SpawnGiantButton" to="." method="_on_spawn_giant_button_button_down"]
+[connection signal="button_down" from="UI/SpawnArcherButton" to="." method="_on_spawn_archer_button_button_down"]
 [connection signal="timeout" from="GiantSpawnTimer" to="." method="_on_giant_spawn_timer_timeout"]
 
 [editable path="UI"]

@@ -27,6 +27,7 @@ var hitsound = MasterAudio.get_child(5)
 @onready var resource_spawn_point = $ResourceSpawnPoint
 @onready var death_sound_player = $DeathSoundPlayer
 @onready var WOOD_SCENE = load('res://wood.tscn')
+@onready var STONE_SCENE = load('res://stone.tscn')
 
 
 func _ready():
@@ -98,6 +99,12 @@ func die():
 		var wood = WOOD_SCENE.instantiate()
 		get_tree().current_scene.add_child(wood)
 		wood.global_position = resource_spawn_point.global_position
+	var stone_count = randi_range(0, 1)
+	for _i in range(stone_count):
+		var stone = STONE_SCENE.instantiate()
+		get_tree().current_scene.add_child(stone)
+		stone.global_position = resource_spawn_point.global_position
+		
 	#death_sound_player.play()
 	
 	#print(death_sound_player.playing)
