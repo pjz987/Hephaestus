@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv6bexvroye4v"]
+[gd_scene load_steps=15 format=3 uid="uid://cv6bexvroye4v"]
 
 [ext_resource type="Script" path="res://giant.gd" id="1_4qho0"]
 [ext_resource type="Texture2D" uid="uid://jejcgnuvw6d4" path="res://icon.svg" id="1_8vswq"]
 [ext_resource type="Texture2D" uid="uid://e7nnaeb0i5gr" path="res://giant.png" id="3_3qij8"]
 [ext_resource type="Theme" uid="uid://cjf071kagw7u2" path="res://theme.tres" id="3_6gmam"]
 [ext_resource type="AudioStream" uid="uid://denttfosd8eyp" path="res://giant f 2.wav" id="4_d4n0d"]
+[ext_resource type="Texture2D" uid="uid://d2uly3r16ych4" path="res://lightning.png" id="6_st4lv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y037u"]
 size = Vector2(12, 12)
@@ -198,5 +199,10 @@ volume_db = 3.133
 
 [node name="BloodSpawnPoint" type="Node2D" parent="."]
 position = Vector2(0, -37)
+
+[node name="LightningSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -84)
+texture = ExtResource("6_st4lv")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

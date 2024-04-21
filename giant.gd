@@ -27,12 +27,15 @@ var hitsound = MasterAudio.get_child(5)
 @onready var resource_spawn_point = $ResourceSpawnPoint
 @onready var death_sound_player = $DeathSoundPlayer
 @onready var blood_spawn_point = $BloodSpawnPoint
+@onready var lightning_sprite = $LightningSprite
+
 @onready var WOOD_SCENE = load('res://wood.tscn')
 @onready var STONE_SCENE = load('res://stone.tscn')
 @onready var BLOOD_SCENE = load('res://blood.tscn')
 
 
 func _ready():
+	GameManager.game_won.connect(lightning_die)
 	health = max_health
 	label.text = str(health)
 	if randf() >= 0.5:
@@ -96,7 +99,7 @@ func die():
 	var wood_count = randi_range(3, 4)
 	for _i in range(wood_count):
 		var wood = WOOD_SCENE.instantiate()
-		get_tree().current_scene.add_child(wood)
+		get_tree().current_scene.call_deferred('add_child', wood)
 		wood.global_position = resource_spawn_point.global_position
 	var stone_count = randi_range(0, 1)
 	for _i in range(stone_count):
@@ -117,3 +120,7 @@ func die():
 	dsound.play()
 	queue_free()
   
+func lightning_die():
+	lightning_sprite.visible = true
+	await get_tree().create_timer(0.5).timeout
+	die()
