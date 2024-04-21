@@ -13,9 +13,11 @@ enum STATE {MOVE, REST, ATTACK}
 @export var max_health = 40
 @export var health: int
 var hitsound=MasterAudio.get_child(3)
+#var hitsound=MasterAudio.get_child(10)
 
 @export var attack = 1
 var is_hero: bool
+var dsound = MasterAudio.get_child(7)
 
 @onready var sprite_2d = $Sprite2D
 @onready var label = $Label
@@ -88,6 +90,7 @@ func _on_hurtbox_area_entered(area):
 
 func die():
 	var blood = BLOOD_SCENE.instantiate()
+	dsound.play()
 	get_tree().current_scene.add_child(blood)
 	blood.global_position = blood_spawn_point.global_position
 	blood.emitting = true

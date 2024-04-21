@@ -14,6 +14,9 @@ extends Node2D
 @onready var victory_countdown_label = $UI/VictoryCountdownLabel
 @onready var victory_timer = $VictoryTimer
 
+var zapsound = MasterAudio.get_child(9)
+var thundsound = MasterAudio.get_child(10)
+
 
 func _ready():
 	GameManager.resource_change.connect(_on_resource_changed)
@@ -76,6 +79,9 @@ func _on_exit_button_button_down():
 
 func _on_victory_timer_timeout():
 	GameManager.win_game()
+	zapsound.play()
 	end_screen_label.text = 'VICTORY'
 	end_screen.visible = true
 	end_screen.z_index = 2
+	thundsound.play()
+	#await get_tree().create_timer(1.0).timeout

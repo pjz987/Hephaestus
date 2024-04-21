@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7cvkh5lylxrk"
+path="res://.godot/imported/hoplite bronze.wav-ad652ed18459c9673027c26fffe720b6.sample"
+
+[deps]
+
+source_file="res://hoplite bronze.wav"
+dest_files=["res://.godot/imported/hoplite bronze.wav-ad652ed18459c9673027c26fffe720b6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=25000
+edit/loop_end=-1
+compress/mode=0

@@ -16,6 +16,8 @@ enum STATE {MOVE, REST, ATTACK, RELOAD}
 
 @export var attack = 2
 var is_hero: bool
+var dsound = MasterAudio.get_child(6)
+
 
 @onready var label = $Label
 @onready var ray_cast_2d = $RayCast2D
@@ -110,6 +112,7 @@ func start_moving():
 
 
 func _on_hurtbox_area_entered(area):
+	area.get_parent().hitsound.play()
 	health -= 5
 	if health <= 0:
 		die()
@@ -120,6 +123,8 @@ func die():
 	get_tree().current_scene.add_child(blood)
 	blood.global_position = blood_spawn_point.global_position
 	blood.emitting = true
+	dsound.play()
+	print("dsound played")
 	queue_free()
 	
 

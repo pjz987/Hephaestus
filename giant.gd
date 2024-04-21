@@ -104,7 +104,7 @@ func die():
 	var stone_count = randi_range(0, 1)
 	for _i in range(stone_count):
 		var stone = STONE_SCENE.instantiate()
-		get_tree().current_scene.add_child(stone)
+		get_tree().current_scene.call_deferred('add_child', stone)
 		stone.global_position = resource_spawn_point.global_position
 	
 	var blood = BLOOD_SCENE.instantiate()
