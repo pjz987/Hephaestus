@@ -95,7 +95,7 @@ position = Vector2(119, 180)
 position = Vector2(154, 180)
 
 [node name="Archer" parent="." instance=ExtResource("9_ssi2e")]
-position = Vector2(21, 180)
+position = Vector2(47, 180)
 
 [node name="Temple" type="Sprite2D" parent="."]
 z_index = 1

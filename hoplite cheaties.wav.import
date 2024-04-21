@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dpmdt447awwgv"
+path="res://.godot/imported/hoplite cheaties.wav-3ed24532cf795d308f204ba8292e41c0.sample"
+
+[deps]
+
+source_file="res://hoplite cheaties.wav"
+dest_files=["res://.godot/imported/hoplite cheaties.wav-3ed24532cf795d308f204ba8292e41c0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

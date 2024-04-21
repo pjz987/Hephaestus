@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cagd604u2ujhx"]
+[gd_scene load_steps=12 format=3 uid="uid://cagd604u2ujhx"]
 
 [ext_resource type="AudioStream" uid="uid://mqd0ualb8sqb" path="res://ESM_One_Shot_Vocal_Frost_Giant_Monster_Death_3_Human_Creature_Growl_Pain_Groan_Moan_Hurt.wav" id="1_7hplh"]
 [ext_resource type="AudioStream" uid="uid://bftj3gro356cq" path="res://ArrowRelease_BW.54284.wav" id="2_r7um7"]
@@ -6,26 +6,53 @@
 [ext_resource type="AudioStream" uid="uid://ck80btt5cx8dc" path="res://ESM_Fighting_Game_One_Shot_Designed_Combat_Hits_X_Ray_Hit_Sword_Spear_Slide_Slice_Slash_Attack.wav" id="4_uhfwx"]
 [ext_resource type="AudioStream" uid="uid://bfwbi8hn6ptgl" path="res://ESM_FG_FX_one_shot_farming_axe_chop_2_tool_wood_impact_whoosh.wav" id="5_th0j2"]
 [ext_resource type="AudioStream" uid="uid://dagw5d7euqv7" path="res://ESM_MU_FX_earth_whoosh_boulder_thowing_short_action_08.wav" id="6_4uhdd"]
+[ext_resource type="AudioStream" uid="uid://chexu4auewjqa" path="res://ESM_ACV_Vocals_female_death_gut_hit_groan_03.wav" id="7_v1xwu"]
+[ext_resource type="AudioStream" uid="uid://vyvck7kfpfch" path="res://ESM_ACV_Vocals_male_death_grunt_quick_kill_05.wav" id="8_yw51s"]
+[ext_resource type="AudioStream" uid="uid://dpmdt447awwgv" path="res://hoplite cheaties.wav" id="9_4lajv"]
+[ext_resource type="AudioStream" uid="uid://ces3ymus1gb2c" path="res://ZAP.wav" id="10_mrecg"]
+[ext_resource type="AudioStream" uid="uid://64vx1pk5ksyk" path="res://THUND1.wav" id="11_c1y1v"]
 
 [node name="Node" type="Node"]
 
 [node name="DeathSoundPlayer-Giant" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_7hplh")
-volume_db = 14.703
+volume_db = 9.691
 
 [node name="ArrowFire" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_r7um7")
+volume_db = -3.759
 
 [node name="ArrowHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_abaw5")
+volume_db = -3.19
 
 [node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_uhfwx")
+volume_db = -7.879
 
 [node name="WoodGather" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_th0j2")
 
 [node name="BoulderHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_4uhdd")
-volume_db = 3.759
+volume_db = -5.639
 pitch_scale = 0.76
+
+[node name="ArcherDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_v1xwu")
+volume_db = 0.626
+
+[node name="WarriorDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_yw51s")
+volume_db = 0.626
+
+[node name="OST" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4lajv")
+autoplay = true
+
+[node name="Lightning" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_mrecg")
+volume_db = -3.669
+
+[node name="Thunder" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_c1y1v")
