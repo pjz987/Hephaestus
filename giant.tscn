@@ -181,6 +181,7 @@ position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_654nm")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 texture_filter = 1
 offset_left = -8.0
 offset_top = -73.0
