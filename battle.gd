@@ -9,12 +9,19 @@ extends Node2D
 @onready var resources_label = $UI/ResourcesLabel
 @onready var archer_spawn_point = $ArcherSpawnPoint
 @onready var giant_spawn_timer = $GiantSpawnTimer
+@onready var end_screen = $EndScreen
+@onready var end_screen_label = $EndScreen/EndScreenLabel
+@onready var victory_countdown_label = $UI/VictoryCountdownLabel
+@onready var victory_timer = $VictoryTimer
 
 
 func _ready():
 	GameManager.resource_change.connect(_on_resource_changed)
 	GameManager.increase_giant_spawn_rate.connect(_on_increase_giant_spawn_rate)
 	update_resources()
+
+func _process(delta):
+	victory_countdown_label.text = 'Help Arrives\nIn ' + str(ceil(victory_timer.time_left))
 
 func _on_spawn_soldier_button_button_down():
 	if GameManager.resources.wood >= 3:
@@ -50,4 +57,25 @@ func _on_giant_spawn_timer_timeout():
 
 func _on_increase_giant_spawn_rate():
 	giant_spawn_timer.wait_time -= 1.5
-	print('giant spawner time: ', giant_spawn_timer.wait_time)
+
+
+func _on_defeat_zone_area_entered(area):
+	end_screen_label.text = 'DEFEAT'
+	end_screen.visible = true
+	end_screen.z_index = 2
+
+
+func _on_play_again_button_button_down():
+	GameManager.reset_battle()
+	get_tree().reload_current_scene()
+
+
+func _on_exit_button_button_down():
+	get_tree().quit()
+
+
+func _on_victory_timer_timeout():
+	GameManager.win_game()
+	end_screen_label.text = 'VICTORY'
+	end_screen.visible = true
+	end_screen.z_index = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy73dc8nf5c4w"]
+[gd_scene load_steps=14 format=3 uid="uid://cy73dc8nf5c4w"]
 
 [ext_resource type="Script" path="res://battle.gd" id="1_i40am"]
 [ext_resource type="Texture2D" uid="uid://c0u2bg1rjf775" path="res://background.png" id="2_0q5tu"]
@@ -17,6 +17,9 @@ spacing_top = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2hoq"]
 size = Vector2(320.5, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwttw"]
+size = Vector2(17, 27)
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_i40am")
@@ -63,6 +66,17 @@ theme_override_fonts/font = SubResource("FontVariation_brvwi")
 text = "Craft
 Bow"
 
+[node name="VictoryCountdownLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 27.0
+offset_right = 209.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+text = "Help Arrives
+In 2:00"
+horizontal_alignment = 1
+
 [node name="SoldierSpawnPoint" type="Node2D" parent="."]
 position = Vector2(-9, 180)
 
@@ -106,9 +120,71 @@ texture = ExtResource("10_8oj7x")
 wait_time = 12.0
 autostart = true
 
+[node name="DefeatZone" type="Area2D" parent="."]
+position = Vector2(-9, 168)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DefeatZone"]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_dwttw")
+
+[node name="EndScreen" type="ColorRect" parent="."]
+visible = false
+z_index = -2
+offset_right = 320.0
+offset_bottom = 180.0
+theme = ExtResource("7_t4m8r")
+color = Color(0, 0, 0, 0.501961)
+
+[node name="EndScreenLabel" type="Label" parent="EndScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 24.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+text = "Defeat
+"
+
+[node name="PlayAgainButton" type="Button" parent="EndScreen"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 97.0
+offset_right = 203.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+text = "Play Again"
+
+[node name="ExitButton" type="Button" parent="EndScreen"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 116.0
+offset_right = 179.0
+offset_bottom = 132.0
+theme_override_colors/font_color = Color(0.960784, 1, 0.909804, 1)
+text = "Exit
+"
+
+[node name="VictoryTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
 [connection signal="button_down" from="UI/SpawnSoldierButton" to="." method="_on_spawn_soldier_button_button_down"]
 [connection signal="button_down" from="UI/SpawnGiantButton" to="." method="_on_spawn_giant_button_button_down"]
 [connection signal="button_down" from="UI/SpawnArcherButton" to="." method="_on_spawn_archer_button_button_down"]
 [connection signal="timeout" from="GiantSpawnTimer" to="." method="_on_giant_spawn_timer_timeout"]
+[connection signal="area_entered" from="DefeatZone" to="." method="_on_defeat_zone_area_entered"]
+[connection signal="button_down" from="EndScreen/PlayAgainButton" to="." method="_on_play_again_button_button_down"]
+[connection signal="button_down" from="EndScreen/ExitButton" to="." method="_on_exit_button_button_down"]
+[connection signal="timeout" from="VictoryTimer" to="." method="_on_victory_timer_timeout"]
 
 [editable path="UI"]
